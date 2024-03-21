@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Users</title>
+    <style>
+        .tg{
+            border-collapse: collapse;
+            border-spacing: 0;
+            background-color: #ccc;
+        }
+
+        .tg td{
+            font-family: Arial,sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #f0f0f0;
+        }
+
+
+        .tg th{
+            font-family: Arial,sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #f0f0f0;
+        }
+
+        .button {
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+<h1>User List</h1>
+
+<table class="tg">
+    <tr>
+        <th>Id</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Job position</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Role</th>
+        <th></th>
+        <th></th>
+
+    </tr>
+
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.getId}"></td>
+        <td th:utext="${user.getName}"></td>
+        <td th:utext="${user.getLastName}"></td>
+        <td th:utext="${user.getEmail}"></td>
+        <td th:utext="${user.getJobPosition}"></td>
+        <td th:utext="${user.getUsername}"></td>
+        <td th:utext="${user.getPassword}"></td>
+        <td><span th:each="role,iterStat : ${user.getAuthorities}" th:text="${role} + (iterStat.last ? '' : ', ')"></span></td>
+        <td><a th:href="@{admin/editUser/{id}(id=${user.id})}">Edit</a></td>
+        <td><a th:href="@{admin/delete/{id}(id=${user.id})}">Delete</a></td>
+
+    </tr>
+</table>
+<br>
+<br>
+<a class="button" th:href="@{admin/createUser}">Add User</a>
+<br>
+<br>
+<a class="button" href="#" th:href="@{/logout}">Log Out</a>
+
+</body>
+
+</html>
