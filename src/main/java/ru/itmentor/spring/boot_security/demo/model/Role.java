@@ -3,6 +3,7 @@ package ru.itmentor.spring.boot_security.demo.model;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+
 import java.util.Set;
 
 @Entity
