@@ -13,6 +13,7 @@ import ru.itmentor.spring.boot_security.demo.service.UserService;
 import java.util.List;
 
 @Controller
+
 @RequestMapping("/admin")
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminController {
@@ -43,8 +44,6 @@ public class AdminController {
     }
 
 
-
-
     @GetMapping("admin/createUser")
     public String showCreateForm(Model model) {
         addAllRolesToModel(model);
@@ -67,13 +66,13 @@ public class AdminController {
         return "admin/editUser";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/admin/editUser/{id}")
     public String updateUser(@ModelAttribute User user) {
         userService.updateUser(user);
         return "redirect:/admin/users";
     }
 
-    @GetMapping("admin/delete/{id}")
+    @DeleteMapping("admin/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin/users";
